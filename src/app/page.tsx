@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react"
+import { useEffect, useState } from "react"
 
 interface TableEntry {
   domainRating: string;
@@ -17,11 +17,16 @@ export default function Home() {
 
   const [proxy, setProxy] = useState('');
 
-  const [captchaKey, setCaptchaKey] = useState(localStorage.getItem('captchaKey') || "");
+  const [captchaKey, setCaptchaKey] = useState("");
 
   const [loading, setLoading] = useState(false);
 
   const [entries, setEntries] = useState<TableEntry[]>([]);
+
+  useEffect(() => {
+    const pull = localStorage.getItem('captchaKey') || "";
+    setCaptchaKey(pull);
+  }, []);
 
   // const extractDomain = (url: string) => {
   //   const regex = /^(?:https?:\/\/)?(?:[^@\/\n]+@)?(?:www\.)?([^:\/\n]+)/i;
