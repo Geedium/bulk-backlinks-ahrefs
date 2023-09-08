@@ -17,7 +17,7 @@ export default function Home() {
 
   const [proxy, setProxy] = useState('');
 
-  const [captchaKey, setCaptchaKey] = useState('');
+  const [captchaKey, setCaptchaKey] = useState(localStorage.getItem('captchaKey') || "");
 
   const [loading, setLoading] = useState(false);
 
@@ -110,6 +110,7 @@ export default function Home() {
         <div>2Captcha API key: </div>
         <input type="text" className="border border-slate-400 w-full" value={captchaKey} onChange={(e) => {
           const val = e.target?.value;
+          localStorage.setItem('captchaKey', val);
           setCaptchaKey(val);
         }} />
       </div>
